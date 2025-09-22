@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,7 +11,7 @@ public class Starter extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/billing_dashboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/thogakadedashboard.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);

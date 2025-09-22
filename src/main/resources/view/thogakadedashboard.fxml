@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="450.0" prefWidth="650.0"
+            style="-fx-background-color: linear-gradient(to bottom right, #eef2f3, #8e9eab);"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.dashboardController.ThogakadeDashboardController">
+
+   <children>
+      <!-- Title Label -->
+      <Label layoutX="60.0" layoutY="40.0" text="Thogakade Management Dashboard"
+             textFill="#2c3e50">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="30.0"/>
+         </font>
+      </Label>
+
+      <!-- Customer Management Button -->
+      <JFXButton fx:id="btnCustomerMangment" layoutX="57.0" layoutY="150.0"
+                 prefHeight="50.0" prefWidth="250.0" text="Customer Management"
+                 textFill="WHITE" onAction="#btnCustomerMangmentOnAction"
+                 style="-fx-background-color: linear-gradient(to right, #00c6ff, #0072ff);
+                          -fx-background-radius: 25px; -fx-cursor: hand;">
+         <font>
+            <Font name="System Bold" size="18.0"/>
+         </font>
+      </JFXButton>
+
+      <!-- Item Management Button -->
+      <JFXButton fx:id="btnItemManagment" layoutX="336.0" layoutY="150.0"
+                 prefHeight="50.0" prefWidth="250.0" text="Item Management"
+                 textFill="WHITE" onAction="#btnItemManagmentOnAction"
+                 style="-fx-background-color: linear-gradient(to right, #ff9966, #ff5e62);
+                          -fx-background-radius: 25px; -fx-cursor: hand;">
+         <font>
+            <Font name="System Bold" size="18.0"/>
+         </font>
+      </JFXButton>
+
+      <!-- Order Management Button -->
+      <JFXButton fx:id="btnOrdermangment" layoutX="57.0" layoutY="240.0"
+                 prefHeight="50.0" prefWidth="250.0" text="Order Management"
+                 textFill="WHITE" onAction="#btnOrdermangmentOnAction"
+                 style="-fx-background-color: linear-gradient(to right, #56ab2f, #a8e063);
+                          -fx-background-radius: 25px; -fx-cursor: hand;">
+         <font>
+            <Font name="System Bold" size="18.0"/>
+         </font>
+      </JFXButton>
+
+      <!-- Order Detail Management Button -->
+      <JFXButton fx:id="btnOrderDetailMangment" layoutX="336.0" layoutY="240.0"
+                 prefHeight="50.0" prefWidth="250.0" text="Order Detail Management"
+                 textFill="WHITE" onAction="#btnOrderDetailMangmentOnAction"
+                 style="-fx-background-color: linear-gradient(to right, #f7971e, #ffd200);
+                          -fx-background-radius: 25px; -fx-cursor: hand;">
+         <font>
+            <Font name="System Bold" size="18.0"/>
+         </font>
+      </JFXButton>
+
+   </children>
+</AnchorPane>
