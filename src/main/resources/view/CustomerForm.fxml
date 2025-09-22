@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="688.0" prefWidth="934.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.customerController.CustomerFormController">
+   <children>
+      <Label layoutX="323.0" layoutY="7.0" prefHeight="45.0" prefWidth="398.0" text="Togakade Stores &amp; Distributors " textAlignment="CENTER" textFill="#006ff7">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="15.0" layoutY="536.0" prefHeight="22.0" prefWidth="105.0" text="Customer Title :">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="15.0" layoutY="581.0" text="Name : ">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="246.0" layoutY="536.0" text="Date of Birth :">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="283.0" layoutY="582.0" text="Salary :">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="495.0" layoutY="536.0" text="Address :">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="523.0" layoutY="585.0" text="City: ">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="705.0" layoutY="583.0" text="PostalCode :">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="724.0" layoutY="531.0" text="Province :">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="txtDOB" layoutX="344.0" layoutY="531.0" prefHeight="26.0" prefWidth="119.0" />
+      <ComboBox fx:id="txtComTitle" layoutX="131.0" layoutY="538.0" prefHeight="26.0" prefWidth="106.0" />
+      <TextField fx:id="txtName" layoutX="131.0" layoutY="577.0" prefHeight="26.0" prefWidth="106.0" />
+      <TextField fx:id="txtSalary" layoutX="342.0" layoutY="577.0" prefHeight="26.0" prefWidth="119.0" />
+      <TextField fx:id="txtAddress" layoutX="567.0" layoutY="531.0" prefHeight="26.0" prefWidth="119.0" />
+      <TextField fx:id="txtCity" layoutX="568.0" layoutY="578.0" prefHeight="26.0" prefWidth="119.0" />
+      <TextField fx:id="txtProvince" layoutX="800.0" layoutY="524.0" prefHeight="26.0" prefWidth="119.0" />
+      <TextField fx:id="txtPostalCode" layoutX="798.0" layoutY="576.0" prefHeight="26.0" prefWidth="119.0" />
+      <Button fx:id="btnAdd" layoutX="344.0" layoutY="630.0" mnemonicParsing="false" onAction="#btnAddOnAction" text="Add" />
+      <Button fx:id="btnUpdate" layoutX="405.0" layoutY="630.0" mnemonicParsing="false" onAction="#btnUpdateOnaction" text="Update" />
+      <Button fx:id="btnDelete" layoutX="480.0" layoutY="630.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" text="Delete" />
+      <Button fx:id="btnClear" layoutX="547.0" layoutY="630.0" mnemonicParsing="false" onAction="#btnClearOnAction" text="Clear" />
+      <TableView fx:id="tblCustomerDetails" layoutX="9.0" layoutY="75.0" prefHeight="398.0" prefWidth="921.0">
+        <columns>
+            <TableColumn fx:id="colID" prefWidth="67.99999713897705" text="ID" />
+          <TableColumn fx:id="colTitle" prefWidth="76.0" text="Title" />
+          <TableColumn fx:id="colName" prefWidth="98.4000244140625" text="Name" />
+            <TableColumn fx:id="colDOB" prefWidth="95.20002746582031" text="DOB" />
+            <TableColumn fx:id="colSalary" prefWidth="123.19998168945312" text="Salary" />
+            <TableColumn fx:id="colAddress" prefWidth="153.60003662109375" text="Address" />
+            <TableColumn fx:id="colCity" text="City" />
+            <TableColumn fx:id="colProvince" minWidth="0.0" prefWidth="107.2000732421875" text="Province" />
+            <TableColumn fx:id="colPostalCode" maxWidth="1000.0" prefWidth="119.199951171875" text="Postal Code" />
+        </columns>
+      </TableView>
+      <Label layoutX="316.0" layoutY="494.0" prefHeight="16.0" prefWidth="106.0" text="Customer ID">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtCustomerID" layoutX="416.0" layoutY="489.0" onAction="#txtCustomerIDOnAction" prefHeight="26.0" prefWidth="119.0" />
+   </children>
+</AnchorPane>
