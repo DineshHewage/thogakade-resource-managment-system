@@ -1,0 +1,8 @@
+package controller.itemController;
+
+import javafx.collections.ObservableList;
+import model.Item;
+
+public interface ItemFormService {
+    ObservableList<Item> getAllItems();
+}

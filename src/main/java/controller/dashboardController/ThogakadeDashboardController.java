@@ -41,8 +41,16 @@ public class ThogakadeDashboardController {
 
     @FXML
     void btnItemManagmentOnAction(ActionEvent event) {
-
-    }
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/view/ItemForm.fxml"));
+            Scene scene = new Scene(root);
+            customerManagement.setScene(scene);
+            customerManagement.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+     }
 
     @FXML
     void btnOrderDetailMangmentOnAction(ActionEvent event) {
