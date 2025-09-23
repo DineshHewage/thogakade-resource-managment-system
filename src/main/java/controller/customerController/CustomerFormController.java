@@ -241,5 +241,8 @@ public class CustomerFormController implements Initializable {
         }
         alert.showAndWait();
     }
+
+    public void txtCustomerIDOnAction(ActionEvent actionEvent) {
+    }
 }
 
