@@ -33,4 +33,26 @@ public class ItemController implements ItemFormService{
         }
         return ItemObserverList;
     }
+
+    @Override
+    public void addItem(Item newItem) {
+
+    }
+
+    @Override
+    public String itemCodeAutoGenerate() {
+        String sql = "SELECT ItemCode FROM Item ORDER BY ItemCode DESC LIMIT 1";
+        try {
+            DBConnection instance = DBConnection.getInstance();
+            Connection connection = instance.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return "";
+    }
 }

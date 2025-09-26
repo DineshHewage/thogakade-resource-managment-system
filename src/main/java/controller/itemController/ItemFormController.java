@@ -91,8 +91,6 @@ public class ItemFormController implements Initializable {
                 setSelectedValue(newValue);
             }
         });
-
-
     }
 
     private void setSelectedValue(Item newValue) {
@@ -100,6 +98,13 @@ public class ItemFormController implements Initializable {
        txtPackSizeNumber.setText ((newValue.getPackSize()));
        txtUnitPrice.setText(String.valueOf((newValue.getUnitPrice())));
        txtQtyOnhand.setText(String.valueOf((newValue.getQtyOnHand())));
+    }
+
+    private void clearItems(){
+        txtDiscription.clear();
+        txtPackSizeNumber.clear();
+        txtUnitPrice.clear();
+        txtQtyOnhand.clear();
     }
 
     private void loadItemTable(){
@@ -110,11 +115,20 @@ public class ItemFormController implements Initializable {
     @FXML
     void btnAddOnAction(ActionEvent event) {
 
+        Item newItem = new Item(
+                itemFormService.itemCodeAutoGenerate(),
+                txtDiscription.getText(),
+                (txtPackSizeNumber.getText() + comPackSizeUnit.getSelectionModel().getSelectedItem()),
+                Double.parseDouble(txtUnitPrice.getText()),
+                Integer.parseInt(txtQtyOnhand.getText())
+        );
+
+        itemFormService.addItem(newItem);
     }
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
-
+        clearItems();
     }
 
     @FXML

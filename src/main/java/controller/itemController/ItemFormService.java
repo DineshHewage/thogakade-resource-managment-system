@@ -5,4 +5,8 @@ import model.Item;
 
 public interface ItemFormService {
     ObservableList<Item> getAllItems();
+
+    void addItem(Item newItem);
+
+    String itemCodeAutoGenerate();
 }
