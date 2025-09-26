@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -114,7 +115,6 @@ public class ItemFormController implements Initializable {
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
-
         Item newItem = new Item(
                 itemFormService.itemCodeAutoGenerate(),
                 txtDiscription.getText(),
@@ -122,8 +122,10 @@ public class ItemFormController implements Initializable {
                 Double.parseDouble(txtUnitPrice.getText()),
                 Integer.parseInt(txtQtyOnhand.getText())
         );
-
         itemFormService.addItem(newItem);
+        clearItems();
+        loadItemTable();
+
     }
 
     @FXML
@@ -141,4 +143,19 @@ public class ItemFormController implements Initializable {
 
     }
 
+    public static void addItemMessage(int i){
+        Alert alert;
+        if (i > 0) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Item detail added successfully!");
+        } else {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to add item details.");
+        }
+        alert.showAndWait();
+    }
 }
