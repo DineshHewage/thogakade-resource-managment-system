@@ -13,7 +13,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Item;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -113,8 +112,26 @@ public class ItemFormController implements Initializable {
         tblItem.setItems(itemObservableList);
     }
 
+    private String getSlectedItemCode(){
+        //      Get the current selected item from the tableView.
+        Item selectedItem = tblItem.getSelectionModel().getSelectedItem();
+
+        if (selectedItem == null) {
+            // No row selected, show error message
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select an item from the table to update.");
+            alert.showAndWait();
+        }
+
+//      Get the item code from the selected item.
+        return selectedItem.getItemCode();
+    }
+
     @FXML
     void btnAddOnAction(ActionEvent event) {
+        getSlectedItemCode();
         Item newItem = new Item(
                 itemFormService.itemCodeAutoGenerate(),
                 txtDiscription.getText(),
@@ -134,36 +151,23 @@ public class ItemFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-
+        Item deteleItem = new Item(
+                getSlectedItemCode(),
+                txtDiscription.getText(),
+                comPackSizeUnit.getSelectionModel().getSelectedItem(),
+                Double.parseDouble(txtUnitPrice.getText()),
+                Integer.parseInt(txtQtyOnhand.getText())
+        );
+        itemFormService.deleteItem(deteleItem);
+        clearItems();
+        loadItemTable();
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-//        Get the current selected item from the tableView.
-        Item selectedItem = tblItem.getSelectionModel().getSelectedItem();
-
-        if (selectedItem == null) {
-            // No row selected, show error message
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Selection");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select an item from the table to update.");
-            alert.showAndWait();
-            return;
-        }
-
-//        Get the item code from the selected item.
-        String selectedItemItemCode = selectedItem.getItemCode();
-
-//        String itemCode = selectedItemItemCode;
-//        String discription = txtDiscription.getText();
-//        String packSize = comPackSizeUnit.getSelectionModel().getSelectedItem();
-//        double unitPrice = Double.parseDouble(txtUnitPrice.getText());
-//        int qtyOnHand = Integer.parseInt(txtQtyOnhand.getText());
-
 //        Create the updated item
         Item updatedItem = new Item(
-                selectedItemItemCode,
+                getSlectedItemCode(),
                 txtDiscription.getText(),
                 comPackSizeUnit.getSelectionModel().getSelectedItem(),
                 Double.parseDouble(txtUnitPrice.getText()),
@@ -202,6 +206,22 @@ public class ItemFormController implements Initializable {
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Failed to update item details.");
+        }
+        alert.showAndWait();
+    }
+
+    public static void deleteItemMessage(int i){
+        Alert alert;
+        if (i > 0) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Item detail deleted successfully!");
+        } else {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to delete item details.");
         }
         alert.showAndWait();
     }

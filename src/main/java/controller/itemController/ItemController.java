@@ -5,8 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Item;
 import java.sql.*;
-import static controller.itemController.ItemFormController.addItemMessage;
-import static controller.itemController.ItemFormController.updateItemMessage;
+import static controller.itemController.ItemFormController.*;
 
 public class ItemController implements ItemFormService{
     @Override
@@ -92,5 +91,22 @@ public class ItemController implements ItemFormService{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void deleteItem(Item deteleItem) {
+        String sql = "DELETE FROM item WHERE ItemCode=?";
+
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, deteleItem.getItemCode());
+            int i = preparedStatement.executeUpdate();
+            deleteItemMessage(i);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }

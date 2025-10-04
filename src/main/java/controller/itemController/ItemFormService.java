@@ -11,4 +11,6 @@ public interface ItemFormService {
     String itemCodeAutoGenerate();
 
     void updatedItem(Item updatedItem);
+
+    void deleteItem(Item deteleItem);
 }
