@@ -125,7 +125,6 @@ public class ItemFormController implements Initializable {
         itemFormService.addItem(newItem);
         clearItems();
         loadItemTable();
-
     }
 
     @FXML
@@ -140,7 +139,39 @@ public class ItemFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+//        Get the current selected item from the tableView.
+        Item selectedItem = tblItem.getSelectionModel().getSelectedItem();
 
+        if (selectedItem == null) {
+            // No row selected, show error message
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText(null);
+            alert.setContentText("Please select an item from the table to update.");
+            alert.showAndWait();
+            return;
+        }
+
+//        Get the item code from the selected item.
+        String selectedItemItemCode = selectedItem.getItemCode();
+
+//        String itemCode = selectedItemItemCode;
+//        String discription = txtDiscription.getText();
+//        String packSize = comPackSizeUnit.getSelectionModel().getSelectedItem();
+//        double unitPrice = Double.parseDouble(txtUnitPrice.getText());
+//        int qtyOnHand = Integer.parseInt(txtQtyOnhand.getText());
+
+//        Create the updated item
+        Item updatedItem = new Item(
+                selectedItemItemCode,
+                txtDiscription.getText(),
+                comPackSizeUnit.getSelectionModel().getSelectedItem(),
+                Double.parseDouble(txtUnitPrice.getText()),
+                Integer.parseInt(txtQtyOnhand.getText())
+        );
+        itemFormService.updatedItem(updatedItem);
+        clearItems();
+        loadItemTable();
     }
 
     public static void addItemMessage(int i){
@@ -155,6 +186,22 @@ public class ItemFormController implements Initializable {
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Failed to add item details.");
+        }
+        alert.showAndWait();
+    }
+
+    public static void updateItemMessage(int i){
+        Alert alert;
+        if (i > 0) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Item detail updated successfully!");
+        } else {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to update item details.");
         }
         alert.showAndWait();
     }

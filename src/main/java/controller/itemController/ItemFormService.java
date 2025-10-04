@@ -9,4 +9,6 @@ public interface ItemFormService {
     void addItem(Item newItem);
 
     String itemCodeAutoGenerate();
+
+    void updatedItem(Item updatedItem);
 }
