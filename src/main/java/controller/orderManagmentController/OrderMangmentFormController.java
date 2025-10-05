@@ -15,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Item;
 import model.Order;
 import java.io.IOException;
 import java.net.URL;
@@ -62,6 +63,10 @@ public class OrderMangmentFormController implements Initializable {
     @FXML
     private JFXTextField txtOrderID;
 
+
+    @FXML
+    private JFXTextField txtCustID;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //  ---------- Map each TableColumn to the corresponding property in the Order model class
@@ -70,6 +75,19 @@ public class OrderMangmentFormController implements Initializable {
         colOrderID.setCellValueFactory(new PropertyValueFactory<>("orderID"));
         loadOrderDetails();
 
+        //  ---- Show item details as per user click -----
+        tblOrders.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue != null) {
+                setSelectedValue(newValue);
+            }
+        });
+
+    }
+
+    private void setSelectedValue(Order newValue) {
+        txtOrderID.setText ((newValue.getOrderID()));
+        txtOrderDate.setText (String.valueOf((newValue.getOrderDate())));
+        txtCustID.setText (String.valueOf((newValue.getCustomerID())));
     }
 
     public void loadOrderDetails(){
@@ -79,7 +97,9 @@ public class OrderMangmentFormController implements Initializable {
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
-
+        txtOrderID.clear();
+        txtOrderDate.clear();
+        txtCustID.clear();
     }
 
     @FXML
