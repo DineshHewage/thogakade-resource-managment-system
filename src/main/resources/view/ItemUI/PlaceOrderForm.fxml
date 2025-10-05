@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: linear-gradient(to bottom right, #2c3e50, #3498db);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.orderManagmentController.PlaceOrderController.PlaceOrderFormController">
+
+    <!-- Title Section -->
+    <VBox layoutX="50.0" layoutY="30.0" spacing="15">
+        <Label style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;" text="Place New Order" />
+
+        <!-- Order ID -->
+        <HBox spacing="15">
+            <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="Order ID:" />
+            <JFXTextField fx:id="txtOrderId" editable="true" promptText="Auto Generated" style="-fx-text-fill: #2c3e50; -fx-background-color: white; -fx-font-weight: bold;" />
+        </HBox>
+
+        <!-- Order Date -->
+        <HBox spacing="15">
+            <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="Order Date:" />
+            <JFXTextField fx:id="txtOrderDate" editable="false" promptText="Auto Generated" style="-fx-text-fill: #2c3e50; -fx-background-color: white;" />
+        </HBox>
+
+        <!-- Customer ID Text Field -->
+        <HBox spacing="15">
+            <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="Customer ID:" />
+            <JFXTextField fx:id="txtCustomerId" prefHeight="30.0" prefWidth="177.0" promptText="Enter Existing Customer ID" style="-fx-text-fill: #2c3e50; -fx-background-color: white; -fx-font-size: 14px;" />
+        </HBox>
+
+
+        <!-- Buttons -->
+        <HBox alignment="CENTER" layoutY="50.0" spacing="20">
+            <JFXButton fx:id="btnPlaceOrder" buttonType="RAISED" onAction="#btnPlaceOrderOnAction" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 20px;" text="Place Order" />
+
+            <JFXButton fx:id="btnCancel" buttonType="RAISED" onAction="#btnCancelOnAction" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 20px;" text="Cancel" />
+        </HBox>
+    </VBox>
+
+    <!-- Image Section -->
+    <ImageView fitHeight="300.0" fitWidth="250.0" layoutX="370.0" layoutY="100.0">
+        <image>
+            <Image url="/imagers/PlaceNewOrder.png"/>
+        </image>
+    </ImageView>
+</AnchorPane>
