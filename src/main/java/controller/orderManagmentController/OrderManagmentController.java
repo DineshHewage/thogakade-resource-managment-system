@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Order;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class OrderManagmentController implements OrderManagmentFormService {
     @Override
@@ -33,5 +30,19 @@ public class OrderManagmentController implements OrderManagmentFormService {
             throw new RuntimeException(e);
         }
         return orderList;
+    }
+
+    @Override
+    public ResultSet searchOrder(String orderId) {
+        String sql = "SELECT * FROM orders WHERE OrderID = ?";
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, orderId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

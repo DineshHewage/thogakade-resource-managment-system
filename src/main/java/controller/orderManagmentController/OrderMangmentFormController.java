@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -17,8 +18,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Item;
 import model.Order;
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class OrderMangmentFormController implements Initializable {
@@ -85,12 +90,12 @@ public class OrderMangmentFormController implements Initializable {
     }
 
     private void setSelectedValue(Order newValue) {
-        txtOrderID.setText ((newValue.getOrderID()));
-        txtOrderDate.setText (String.valueOf((newValue.getOrderDate())));
-        txtCustID.setText (String.valueOf((newValue.getCustomerID())));
+        txtOrderID.setText((newValue.getOrderID()));
+        txtOrderDate.setText(String.valueOf((newValue.getOrderDate())));
+        txtCustID.setText(String.valueOf((newValue.getCustomerID())));
     }
 
-    public void loadOrderDetails(){
+    public void loadOrderDetails() {
         ObservableList<Order> orderList = orderManagmentFormService.getAllOrders();
         tblOrders.setItems(orderList);
     }
@@ -127,12 +132,41 @@ public class OrderMangmentFormController implements Initializable {
 
     @FXML
     void btnSearchOnAction(ActionEvent event) {
+        String orderId = txtOrderID.getText().trim();
+        ResultSet resultSet = orderManagmentFormService.searchOrder(orderId);
 
+        if (orderId.isEmpty()) {
+            showAlert("Please enter an Order ID to search");
+            return;
+        }
+
+        try {
+            if (resultSet.next()) {
+                // Extract data from ResultSet and populate text fields
+                String orderID = resultSet.getString("orderID");
+                Date orderDate = resultSet.getDate("OrderDate");
+                String customerID = resultSet.getString("CustID");
+
+                // Set values to text fields
+                txtOrderID.setText(orderID);
+                txtOrderDate.setText(String.valueOf(orderDate));
+                txtCustID.setText(customerID);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
 
     }
-
 }
