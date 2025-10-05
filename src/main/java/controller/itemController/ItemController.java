@@ -4,10 +4,8 @@ import db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Item;
-
 import java.sql.*;
-
-import static controller.itemController.ItemFormController.addItemMessage;
+import static controller.itemController.ItemFormController.*;
 
 public class ItemController implements ItemFormService{
     @Override
@@ -74,5 +72,41 @@ public class ItemController implements ItemFormService{
             nextItemCode = Integer.parseInt(lastItemCode.substring(1))+1;
         }
         return String.format("P%03d", nextItemCode);
+    }
+
+    @Override
+    public void updatedItem(Item updatedItem) {
+        String sql = "UPDATE item SET Description=?, PackSize=?, UnitPrice=?, QtyOnHand=? WHERE ItemCode=?";
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, updatedItem.getDescription());
+            preparedStatement.setString(2, updatedItem.getPackSize());
+            preparedStatement.setDouble(3, updatedItem.getUnitPrice());
+            preparedStatement.setInt(4, updatedItem.getQtyOnHand());
+            preparedStatement.setString(5, updatedItem.getItemCode());
+            int i = preparedStatement.executeUpdate();
+            updateItemMessage(i);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteItem(Item deteleItem) {
+        String sql = "DELETE FROM item WHERE ItemCode=?";
+
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, deteleItem.getItemCode());
+            int i = preparedStatement.executeUpdate();
+            deleteItemMessage(i);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }

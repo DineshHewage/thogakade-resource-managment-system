@@ -6,12 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class ThogakadeDashboardController {
 
+    public ImageView imgLogo;
     @FXML
     private Button btnCustomerMangment;
 
@@ -43,7 +45,7 @@ public class ThogakadeDashboardController {
     void btnItemManagmentOnAction(ActionEvent event) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/view/ItemForm.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/view/ItemUI/ItemForm.fxml"));
             Scene scene = new Scene(root);
             customerManagement.setScene(scene);
             customerManagement.show();
@@ -59,6 +61,14 @@ public class ThogakadeDashboardController {
 
     @FXML
     void btnOrdermangmentOnAction(ActionEvent event) {
-
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/view/OrderMangmentForm.fxml"));
+            Scene scene = new Scene(root);
+            customerManagement.setScene(scene);
+            customerManagement.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
